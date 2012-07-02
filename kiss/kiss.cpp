@@ -35,20 +35,16 @@ int main(){
 			printf("\nError: Cannot locate landmarks in %s\n", image_name);
 			//return -1;
 		}
-		#if 0 // print the landmarks if you want
+		/*#if 0 // print the landmarks if you want
 			printf("landmarks:\n");
 			for (int i = 0; i < nlandmarks; i++)
 				printf("%3d: %4d %4d\n", i, landmarks[2 * i], landmarks[2 * i + 1]);
-		#endif
+		#endif*/
 
 		for (int x=0; x<nlandmarks; x++){
 			points[x].x = landmarks[2*x];
 			points[x].y = landmarks[2*x+1];
 		}
-		//int *p = landmarks;
-		//IplImage *img = &(IplImage)frame;
-		//cvPolyLine(img, (CvPoint **)&p, &nlandmarks, 1, 1, CV_RGB(255,0,0));
-		//cv::polylines(frame, (cv::Point **)&p, &nlandmarks, 1, 1, CV_RGB(255,0,0));
 		cv::polylines(frame, &pointsPointer , &nlandmarks, 1, 1, CV_RGB(255,0,0));
 		cv::imshow("frame", frame);
 		press = cv::waitKey(1);

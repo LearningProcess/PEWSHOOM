@@ -1,5 +1,5 @@
 // stasm_dll.cpp
-
+#include <cv.h>
 #include "windows.h"
 #include "stasm.hpp"
 #include "stasm_dll.hpp"
@@ -12,7 +12,7 @@ int WINAPI DllMain (HANDLE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 void AsmSearchDll (
     int *pnlandmarks,          // out: number of landmarks, 0 if can't get landmarks
     int landmarks[],           // out: the landmarks, caller must allocate
-    const char image_name[],   // in: used in internal error messages, if necessary
+    cv::Mat mat_name/*const char image_name[]*/,   // in: used in internal error messages, if necessary
     const char image_data[],   // in: image data, 3 bytes per pixel if is_color
     const int width,           // in: the width of the image
     const int height,          // in: the height of the image
@@ -21,7 +21,7 @@ void AsmSearchDll (
     const char conf_file1[])   // in: 2nd config filename, NULL for default, "" if none
 {
     ASSERT(sizeof(int) == 4);  // sanity checks
-    ASSERT(image_name[0]);
+    //ASSERT(image_name[0]);
     ASSERT(width > 10 && height > 10);
     ASSERT(is_color == 0 || is_color == 1);
 
@@ -69,7 +69,7 @@ void AsmSearchDll (
     DET_PARAMS DetParams;       // dummy arg for AsmSearchd
     double MeanTime;            // dummy arg for AsmSearch
     SHAPE Shape = AsmSearch(StartShape, DetParams, MeanTime,
-                            Img, image_name, FALSE, sConfFile0, sConfFile1);
+                            Img, mat_name/*image_name*/, FALSE, sConfFile0, sConfFile1);
 
     *pnlandmarks = 0;
     if (Shape.nrows())          // successfully located landmarks?

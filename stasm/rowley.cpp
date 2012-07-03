@@ -13,7 +13,7 @@
 // A copy of the GNU General Public License is available at
 // http://www.r-project.org/Licenses/
 //-----------------------------------------------------------------------------
-
+#include <cv.h>
 #include "stasm.hpp"
 
 //-----------------------------------------------------------------------------
@@ -23,7 +23,7 @@
 bool
 fRowleyFindFace (DET_PARAMS &DetParams,     // out
                  Image &Img,                // in
-                 const char sImage[],       // in
+                 cv::Mat mat_name/*char sImage[]*/,       // in
                  const char sDataDir[])     // in
 {
 DET_PARAMS *pDetParams;

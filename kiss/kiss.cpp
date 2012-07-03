@@ -30,16 +30,16 @@ int main(){
 		int nlandmarks;
 		int landmarks[500];
 		const char *image_name = "tempPic.bmp";
-		AsmSearchDll(&nlandmarks, landmarks, image_name, (char*)frame.ptr(), frame.cols, frame.rows, 1, NULL, NULL);
+		AsmSearchDll(&nlandmarks, landmarks, frame/*image_name*/, (char*)frame.ptr(), frame.cols, frame.rows, 1, NULL, NULL);
 		if (nlandmarks == 0) {
 			printf("\nError: Cannot locate landmarks in %s\n", image_name);
 			//return -1;
 		}
-		/*#if 0 // print the landmarks if you want
+		#if 0 // print the landmarks if you want
 			printf("landmarks:\n");
 			for (int i = 0; i < nlandmarks; i++)
 				printf("%3d: %4d %4d\n", i, landmarks[2 * i], landmarks[2 * i + 1]);
-		#endif*/
+		#endif
 
 		for (int x=0; x<nlandmarks; x++){
 			points[x].x = landmarks[2*x];

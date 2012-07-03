@@ -38,13 +38,13 @@ void VecToDetParams(DET_PARAMS &DetParams, const Mat &v);
 SHAPE DetParamsToShape(const DET_PARAMS &DetParams); // in
 
 bool fFindDetParams(DET_PARAMS &DetParams,  // out
-                    cv::Mat mat_name/*const char sPath[]*/,     // in: image path
+                    /*cv::Mat mat_name*/const char sPath[],     // in: image path
                     unsigned DetAttr,       // in: specifies which face detector
                     const char sDataDir[],  // in: for face det data files
                     bool fIssueWarnings);   // in: true to issue warnings if needed
 
 int nGetDetParams(DET_PARAMS &DetParams,     // out
-                cv::Mat mat_name/*const char sImage[]*/,         // in: image name
+                /*cv::Mat mat_name*/const char sImage[],         // in: image name
                 unsigned Attr,               // in: specifies which face detector
                 const char sShapeFile[],     // in: shape file
                 const char sDataDir[],       // in: for face det data files
@@ -56,7 +56,7 @@ bool
 fGetStartShape(
         SHAPE &StartShape,              // out: the start shape we are looking for
         DET_PARAMS &DetParams,          // out: informational only
-        cv::Mat mat_name/*const char sImage[]*/,            // in
+        /*cv::Mat mat_name*/const char sImage[],            // in
         const SHAPE &MeanShape,         // in
         unsigned DetAttr,               // in: specifies which face detector
         const SHAPE &DetAv,             // in: either VjAv or RowleyAv

@@ -145,13 +145,13 @@ return Shape;
 static bool fGetDetParamsFromShapeFile (
                     DET_PARAMS &DetParams,      // out
                     char *psImageDirs[],        // out: dirs in sShapeFile
-                    cv::Mat mat_name/*const char sImage[]*/,        // in: image name
+                    /*cv::Mat mat_name*/const char sImage[],        // in: image name
                     unsigned DetAttr,           // in: which face detector
                     const char sShapeFile[])    // in: shape file
 {
 // change xxx to ^xxx$ to avoid spurious matches else B00 would match B0012
 
-char s[SLEN]; //sprintf(s, "^%s$", sGetBase(sImage));
+char s[SLEN]; sprintf(s, "^%s$", sGetBase(sImage));
 
 Vec v = FindMatInFile(sShapeFile, psImageDirs, s, DetAttr, DetAttr);
 
@@ -199,7 +199,7 @@ else if ((DetAttr & FA_Rowley) ||
 // takes note and issues a summary after reading all files.
 
 bool fFindDetParams (DET_PARAMS &DetParams, // out
-                     cv::Mat mat_name/*const char sPath[]*/,    // in: image path
+                     /*cv::Mat mat_name*/const char sPath[],    // in: image path
                      unsigned DetAttr,      // in: which face detector
                      const char sDataDir[], // in: for face det data files
                      bool fIssueWarnings)   // in: true to issue warnings if needed
@@ -207,15 +207,15 @@ bool fFindDetParams (DET_PARAMS &DetParams, // out
 bool fFoundFace = false;
 DetParams.lex = DetParams.rex = INVALID;    // mark eyes as unavailable
 Image Img;  // TODO revisit the need for Img
-memcpy(Img.buf, mat_name.ptr(), 3*mat_name.rows*mat_name.cols);//sLoadImage(Img, sPath);
+/*memcpy(Img.buf, mat_name.ptr(), 3*mat_name.rows*mat_name.cols);*/sLoadImage(Img, sPath);
 switch (DetAttr)
     {
     case FA_ViolaJones:
         fFoundFace = fFindViolaJonesFace(DetParams,
-                                         Img, mat_name/*sPath*/, sDataDir, CONF_nVjMethod != 1);
+                                         Img, /*mat_name*/sPath, sDataDir, CONF_nVjMethod != 1);
         break;
     case FA_Rowley:
-        fFoundFace = fRowleyFindFace(DetParams, Img, mat_name/*sPath*/, sDataDir);
+        fFoundFace = fRowleyFindFace(DetParams, Img, /*mat_name*/sPath, sDataDir);
         break;
     default:
         Err("fFindDetParams: bad DetAttr 0x%x", DetAttr);
@@ -283,7 +283,7 @@ if (fFoundFace && fMustSynthMissingEye(DetAttr))
 // Return 2 if found DetParams in sShapeFile (eyes may not be valid)
 
 int nGetDetParams (DET_PARAMS &DetParams,   // out
-            cv::Mat mat_name/*const char sImage[]*/,        // in: image name
+            /*cv::Mat mat_name*/const char sImage[],        // in: image name
             unsigned DetAttr,           // in: specifies which face detector
             const char sShapeFile[],    // in: shape file
             const char sDataDir[],      // in: for face det data files
@@ -296,7 +296,7 @@ DetParams.lex = DetParams.rex = INVALID; // mark eyes as unavailable
 
 if (!sShapeFile)
     {
-	    if (fFindDetParams(DetParams, mat_name/*sImage*/, DetAttr, sDataDir, fIssueWarnings))
+	    if (fFindDetParams(DetParams, /*mat_name*/sImage, DetAttr, sDataDir, fIssueWarnings))
         nGenDet = 1;    // successful
     }
 else    // use shape file
@@ -306,7 +306,7 @@ else    // use shape file
     char *sImageDirs;   // image directories in the shape file
 
     if (fGetDetParamsFromShapeFile(DetParams, &sImageDirs,
-                                   mat_name/*sImage*/, DetAttr, sShapeFile))
+                                   /*mat_name*/sImage, DetAttr, sShapeFile))
         {
         nGenDet = 2;    // successful
         }
@@ -321,12 +321,12 @@ else    // use shape file
             // search for (basename of) sImage in sImageDirs with image extensions
 
             ASSERT(sImageDirs[0]);
-            //sGetPathGivenDirs(sPath, sImage, sImageDirs, sShapeFile);
+            sGetPathGivenDirs(sPath, sImage, sImageDirs, sShapeFile);
             }
         else
-            //strcpy(sPath, sImage);
+            strcpy(sPath, sImage);
 
-        if (fFindDetParams(DetParams, mat_name/*sPath*/, DetAttr, sDataDir, fIssueWarnings))
+        if (fFindDetParams(DetParams, /*mat_name*/sPath, DetAttr, sDataDir, fIssueWarnings))
             nGenDet = 1;    // successful
         }
     if (fSkipIfNotInShapeFile)
@@ -351,7 +351,7 @@ bool
 fGetStartShape (
         SHAPE &StartShape,              // out: the start shape we are looking for
         DET_PARAMS &DetParams,          // out: informational only
-        cv::Mat mat_name/*const char sImage[]*/,            // in: image file name
+        /*cv::Mat mat_name*/const char sImage[],            // in: image file name
         const SHAPE &MeanShape,         // in: mean shape from ASM file
         unsigned DetAttr,               // in: specifies which face detector
         const SHAPE &DetAv,             // in: either VjAv or RowleyAv from ASM file
@@ -361,7 +361,7 @@ fGetStartShape (
         bool fIssueWarnings)            // in: true to issue warnings if needed
 {
 if (!nGetDetParams(DetParams,
-                   mat_name/*sImage*/, DetAttr, sShapeFile, sDataDir,
+                   /*mat_name*/sImage, DetAttr, sShapeFile, sDataDir,
                    false, fSkipIfNotInShapeFile, fIssueWarnings))
     {
     return false;       // face detector failed

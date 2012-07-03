@@ -47,7 +47,7 @@ using namespace std;
 #include "matview.hpp"
 #include "mchol.hpp"
 
-using namespace GslMat;
+/*using namespace GslMat;*/
 
 #include "image.hpp"
 #include "jpegutil.hpp"

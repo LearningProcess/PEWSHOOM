@@ -406,6 +406,7 @@
     <ClInclude Include="..\regex\regex.h" />
     <ClInclude Include="..\regex\regex_config.h" />
     <ClInclude Include="..\rowley\tclHash.h" />
+    <ClInclude Include="..\stasm\stasm.hpp" />
     <ClInclude Include="..\stasm\stasm_dll.hpp" />
   </ItemGroup>
   <ItemGroup>

@@ -23,7 +23,7 @@
 bool
 fRowleyFindFace (DET_PARAMS &DetParams,     // out
                  Image &Img,                // in
-                 cv::Mat mat_name/*char sImage[]*/,       // in
+                 /*cv::Mat mat_name*/const char sImage[],       // in
                  const char sDataDir[])     // in
 {
 DET_PARAMS *pDetParams;

@@ -7,7 +7,7 @@ extern "C" __declspec(dllexport)
 void AsmSearchDll(
     int *pnlandmarks,          // out: number of landmarks, 0 if can't get landmarks
     int landmarks[],           // out: the landmarks, caller must allocate
-    cv::Mat mat_name/*const char image_name[]*/,   // in: used in internal error messages, if necessary
+    /*cv::Mat mat_name*/const char image_name[],   // in: used in internal error messages, if necessary
     const char image_data[],   // in: image data, 3 bytes per pixel if is_color
     const int width,           // in: the width of the image
     const int height,          // in: the height of the image

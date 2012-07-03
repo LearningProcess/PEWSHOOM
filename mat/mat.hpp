@@ -163,8 +163,7 @@
 
 #include "stasm.hpp"
 
-#define Vec     Mat         // vectors are matrices with 1 row or 1 col
-#define VecView MatView     // ditto
+
 
 // mostly used for parameter sanity checking but also used sometimes for a max temp alloc
 static const size_t MAX_MAT_DIM = 10000;
@@ -213,6 +212,8 @@ namespace GslMat
 {
 class Mat;
 class MatView;
+	typedef Mat Vec;     // vectors are matrices with 1 row or 1 col
+	typedef MatView VecView;     // ditto
 
 // externs for functions defined in mat.cpp
 extern void gslErrHandler(const char *reason, const char *file,

@@ -7,7 +7,7 @@ void CloseViolaJones(void);
 
 bool fFindViolaJonesFace(DET_PARAMS &DetParams,    // out
                          const Image &Img,         // in
-                         /*cv::Mat mat_name*/const char sImage[],      // in
+                         cv::Mat mat_name/*const char sImage[]*/,      // in
                          const char sDataDir[],    // in
                          const bool fEyes);        // in: find eyes too?
 

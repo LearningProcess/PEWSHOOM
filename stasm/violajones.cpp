@@ -77,16 +77,16 @@ if (!pgStorage)
 
 static bool
 fViolaJonesFindFace1 (DET_PARAMS &DetParams,    // out
-                      /*cv::Mat mat_name*/const char sImage[],      // in: image name
+                      cv::Mat mat_name/*const char sImage[]*/,      // in: image name
                       const char sDataDir[])    // in
 {
 if (!pgCascade) // first time? if so, must init detector data structures
     OpenViolaJones(sDataDir);
 cvClearMemStorage(pgStorage);
 
-/*cv::cvtColor(mat_name, mat_name, CV_RGB2GRAY); IplImage* pImage = &IplImage(mat_name);*/IplImage* pImage = cvLoadImage(sImage, CV_LOAD_IMAGE_GRAYSCALE);
+IplImage* pImage = &IplImage(mat_name);//IplImage* pImage = cvLoadImage(sImage, CV_LOAD_IMAGE_GRAYSCALE);
 if (!pImage)
-    Err("can't load %s", /*""*/sImage);
+    Err("can't load %s", mat_name/*sImage*/);
 cvResize(pImage, pImage, CV_INTER_LINEAR);
 cvEqualizeHist(pImage, pImage);
 
@@ -139,7 +139,7 @@ if (pFaces->total)  // success?
     DetParams.width = r->width;
     DetParams.height = r->height;
     }
-cvReleaseImage(&pImage);
+//cvReleaseImage(&pImage);
 
 return pFaces->total > 0;   // return true on success
 }
@@ -151,11 +151,11 @@ return pFaces->total > 0;   // return true on success
 
 bool fFindViolaJonesFace (DET_PARAMS &DetParams,   // out
                           const Image &Img,        // in
-                          /*cv::Mat mat_name*/const char sImage[],     // in
+                          cv::Mat mat_name/*const char sImage[]*/,     // in
                           const char sDataDir[],   // in
                           const bool fEyes)        // in: find eyes too?
 {
-bool fSuccess = fViolaJonesFindFace1(DetParams, /*mat_name*/sImage, sDataDir);
+bool fSuccess = fViolaJonesFindFace1(DetParams, mat_name/*sImage*/, sDataDir);
 if (fSuccess && fEyes)
     FindEyesGivenVjFace(DetParams, Img, sDataDir);
 return fSuccess;

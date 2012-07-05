@@ -59,7 +59,7 @@ AsmSearch(
     DET_PARAMS &DetParams,          // out: face detector parameters
     double &MeanTime,               // out: mean time per image (face det failed excluded)
     const RgbImage &RgbImg,         // in: find face features in this image
-    /*cv::Mat mat_name*/const char sImage[],            // in: file path for RgbImg, for err msgs
+    cv::Mat mat_name/*const char sImage[]*/,            // in: file path for RgbImg, for err msgs
     const bool fRowley=false,       // in: true to use VJ detector, else Rowley
     const char sConfFile0[]="../data/mu-68-1d.conf", // in: 1st config filename
     const char sConfFile1[]="../data/mu-76-2d.conf", // in: 2nd config filename

@@ -22,17 +22,19 @@ int main(){
 
 	while (cam.grab() && press!='q'){
 		cam.retrieve(frame);
-		cv::imwrite("tempPic.bmp", frame);
+		cv::Mat grayMat;
+		cv::cvtColor(frame, grayMat, CV_BGR2GRAY);
+		//cv::imwrite("tempPic.bmp", frame);
 
 		img = Image(frame.cols, frame.rows, false);
 		memcpy(img.buf, frame.ptr(), sizeof(img));
 
 		int nlandmarks;
 		int landmarks[500];
-		const char *image_name = "tempPic.bmp";
-		AsmSearchDll(&nlandmarks, landmarks, /*frame*/image_name, (char*)frame.ptr(), frame.cols, frame.rows, 1, NULL, NULL);
+		//const char *image_name = "tempPic.bmp";
+		AsmSearchDll(&nlandmarks, landmarks, grayMat/*image_name*/, (char*)grayMat.ptr(), grayMat.cols, grayMat.rows, 0, NULL, NULL);
 		if (nlandmarks == 0) {
-			printf("\nError: Cannot locate landmarks in %s\n", image_name);
+			printf("\nError: Cannot locate landmarks in %s\n", ""/*image_name*/);
 			//return -1;
 		}
 		#if 0 // print the landmarks if you want

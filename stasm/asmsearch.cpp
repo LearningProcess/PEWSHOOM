@@ -233,7 +233,7 @@ AsmSearch (
     DET_PARAMS &DetParams,   // out: face detector parameters
     double &MeanTime,        // out: mean time per image (face det failed excluded)
     const RgbImage &RgbImg,  // in: find face features in this image
-    /*cv::Mat mat_name*/const char sImage[],     // in: file path for RgbImg, for err msgs
+    cv::Mat mat_name/*const char sImage[]*/,     // in: file path for RgbImg, for err msgs
     const bool fRowley,      // in: true to use Rowley detector, else VJ (default: true)
     const char sConfFile0[], // in: 1st config filename (default: "../data/mu-68-1d.conf")
     const char sConfFile1[], // in: 2nd config filename, "" if none (default: "../data/mu-76-2d.conf")
@@ -274,7 +274,7 @@ if (fRowley)
     DetAv = Models[0].RowleyAv;
     }
 if (fGetStartShape(StartShape, DetParams,
-                   /*mat_name*/sImage, Models[0].FileMeanShape,
+                   mat_name/*sImage*/, Models[0].FileMeanShape,
                    DetAttr, DetAv, sShapeFile, sDataDir,
                    CONF_fStasmSkipIfNotInShapeFile, fIssueWarnings))
     {

@@ -21,7 +21,7 @@ void AsmSearchDll (
     const char conf_file1[])   // in: 2nd config filename, NULL for default, "" if none
 {
     ASSERT(sizeof(int) == 4);  // sanity checks
-    //ASSERT(image_name[0]);
+    ASSERT(&mat_name);//image_name[0]);
     ASSERT(width > 10 && height > 10);
     ASSERT(is_color == 0 || is_color == 1);
 

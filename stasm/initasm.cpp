@@ -58,7 +58,7 @@ bool CONF_fStasmSkipIfNotInShapeFile = true; // only applies if -t flag is used
 static CONF_ENTRY StasmConfTab[] =
 {
 // p                             sName                       Min Max Type
-{&CONF_sAsmFile,                 "sAsmFile",                 0, 0,   's'},
+{&CONF_sAsmFile,                 "sAsmFile",                 0,  0,  's'},
 {&CONF_fMe17,                    "fMe17",                    0,  1,  'f'},
 {&CONF_nEigs,                    "nEigs",                    1, 100, 'i'},
 {&CONF_nEigsLev0,                "nEigsLev0",                0, 100, 'i'},
